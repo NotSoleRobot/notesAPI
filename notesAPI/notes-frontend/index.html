@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notes</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+    <header>
+
+        <h1>📝 Notes</h1>
+
+        <p>
+            Spring Boot CRUD Application
+        </p>
+
+    </header>
+
+
+    <section class="note-form">
+
+        <h2 id="formTitle">
+            Create Note
+        </h2>
+
+        <input
+                id="noteId"
+                type="hidden">
+
+        <input
+                id="title"
+                type="text"
+                placeholder="Enter title">
+
+        <textarea
+                id="content"
+                placeholder="Write your thoughts..."></textarea>
+
+        <div class="buttons">
+
+            <button id="saveBtn">
+
+                Add Note
+
+            </button>
+
+            <button
+                    id="cancelBtn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="toolbar">
+
+        <input
+
+                type="text"
+
+                id="search"
+
+                placeholder="Search notes...">
+
+    </section>
+
+
+    <section>
+
+        <div
+                id="emptyState">
+
+            <div class="empty-icon">
+
+                📝
+
+            </div>
+
+            <h2>
+
+                No Notes Yet
+
+            </h2>
+
+            <p>
+
+                Create your first note.
+
+            </p>
+
+        </div>
+
+
+        <div
+
+                id="notesContainer"
+
+                class="notes-grid">
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<div
+
+        id="toast"
+
+        class="toast">
+
+</div>
+
+
+<div
+
+        id="deleteModal"
+
+        class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>
+
+            Delete Note?
+
+        </h2>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
+
+        <div class="modal-buttons">
+
+            <button
+
+                    id="confirmDelete"
+
+                    class="danger">
+
+                Delete
+
+            </button>
+
+            <button
+
+                    id="closeModal">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
