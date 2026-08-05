@@ -1,7 +1,10 @@
 package com.example.notesAPI.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.example.notesAPI.model.Note;
 import com.example.notesAPI.repository.NoteRepository;
 
@@ -15,17 +18,15 @@ public class NoteService{
     public Note createNote(Note note){
        return noteRepository.save(note);
     }
-    public Iterable<Note> getAllNotes(){
-        long count=noteRepository.count();
-        if(count==0)
-            return null;
-        else{
-            return noteRepository.findAll();
-        }   
-
+    public List<Note> getAllNotes(){
+        return noteRepository.findAll();
     }
     public Note getNoteById(int id){
-        return noteRepository.findById(id).get();
+        Optional<Note> optionalNote=noteRepository.findById(id);
+        if(optionalNote.isPresent()){
+            return optionalNote.get();
+        }
+        return null;
     }
     public Note updateNoteById(int id,Note note){
        Optional<Note> optionalNote =  noteRepository.findById(id);
@@ -35,7 +36,7 @@ public class NoteService{
         existingNote.setContent(note.getContent());
         return noteRepository.save(existingNote);
        }
-       return new Note();
+       return null;
     }
     public Note deleteNoteById(int id){
         Optional<Note> optionalNote=noteRepository.findById(id);
