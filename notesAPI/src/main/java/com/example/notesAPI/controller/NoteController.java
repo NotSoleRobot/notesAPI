@@ -42,11 +42,6 @@ public class NoteController{
     @GetMapping("/notes/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable int id){
          Note note= noteService.getNoteById(id);
-         if(note==null){
-            return ResponseEntity
-                                .status(HttpStatus.NOT_FOUND)
-                                .build();
-         }
          return ResponseEntity
                             .status(HttpStatus.OK)
                             .body(note);
@@ -54,26 +49,15 @@ public class NoteController{
 
     @PutMapping("/notes/{id}")
     public ResponseEntity<Note> updateNote(@PathVariable int id,@RequestBody Note note){
-        
         Note updatedNote= noteService.updateNoteById(id,note);
-        if(updatedNote!=null){
             return ResponseEntity
                                 .ok(updatedNote);
-        }
-        return ResponseEntity
-                            .status(HttpStatus.NOT_FOUND)
-                            .build();
     }
 
     @DeleteMapping("/notes/{id}")
     public ResponseEntity<Note> deleteNote(@PathVariable int id){
         Note deletedNote= noteService.deleteNoteById(id);
-        if(deletedNote!=null){
             return ResponseEntity
                                 .ok(deletedNote);
-        }
-        return ResponseEntity
-                            .status(HttpStatus.NOT_FOUND)
-                            .build();
     }
 }

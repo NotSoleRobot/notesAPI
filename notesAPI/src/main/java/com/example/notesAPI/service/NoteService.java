@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
+import com.example.notesAPI.exception.NoteNotFoundException;
 import com.example.notesAPI.model.Note;
 import com.example.notesAPI.repository.NoteRepository;
 
@@ -23,31 +23,29 @@ public class NoteService{
     }
     public Note getNoteById(int id){
         Optional<Note> optionalNote=noteRepository.findById(id);
-        if(optionalNote.isPresent()){
-            return optionalNote.get();
+        if(!optionalNote.isPresent()){
+            throw new NoteNotFoundException("Note with id:"+id+"was not found");
         }
-        return null;
+        return optionalNote.get();
     }
     public Note updateNoteById(int id,Note note){
        Optional<Note> optionalNote =  noteRepository.findById(id);
-       if(optionalNote.isPresent()){
-        Note existingNote=optionalNote.get();
+       if(!optionalNote.isPresent()){
+            throw new NoteNotFoundException("Note with id:"+id+"was not found");
+       }
+         Note existingNote=optionalNote.get();
         existingNote.setTitle(note.getTitle());
         existingNote.setContent(note.getContent());
         return noteRepository.save(existingNote);
-       }
-       return null;
     }
     public Note deleteNoteById(int id){
         Optional<Note> optionalNote=noteRepository.findById(id);
-        if(optionalNote.isPresent()){
-            Note delNote=optionalNote.get();
+        if(!optionalNote.isPresent()){
+            throw new NoteNotFoundException("Note with id:"+id+"was not found");
+        }
+         Note delNote=optionalNote.get();
             noteRepository.deleteById(id);
             return delNote;
-        }
-        return null;
-        
-
     }
 
 }
