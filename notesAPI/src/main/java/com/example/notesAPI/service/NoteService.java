@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
 import com.example.notesAPI.exception.NoteNotFoundException;
 import com.example.notesAPI.model.Note;
 import com.example.notesAPI.repository.NoteRepository;

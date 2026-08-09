@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import jakarta.validation.Valid;
 
+import com.example.notesAPI.dto.CreateNoteRequest;
 import com.example.notesAPI.model.Note;
 import com.example.notesAPI.service.NoteService;
+
+import jakarta.validation.Valid;
 
 @RestController
 
@@ -26,7 +28,10 @@ public class NoteController{
     }
     
     @PostMapping("/notes")
-    public ResponseEntity<Note> createNote(@Valid @RequestBody Note note){
+    public ResponseEntity<Note> createNote(@Valid @RequestBody CreateNoteRequest request){
+        Note note=new Note();
+        note.setTitle(request.getTitle());
+        note.setContent(request.getContent());
        Note savedNote= noteService.createNote(note);
         return ResponseEntity.status(HttpStatus.CREATED)
                             .body(savedNote);
