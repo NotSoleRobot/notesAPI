@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.notesAPI.dto.UpdateNoteRequest;
 import com.example.notesAPI.exception.NoteNotFoundException;
 import com.example.notesAPI.model.Note;
 import com.example.notesAPI.repository.NoteRepository;
@@ -47,6 +48,20 @@ public class NoteService{
          Note delNote=optionalNote.get();
             noteRepository.deleteById(id);
             return delNote;
+    }
+    public Note patchNoteById(int id,UpdateNoteRequest request){
+        Note note=noteRepository.findById(id)
+                                .orElseThrow(
+                                    ()->  new NoteNotFoundException("Note not found with id"+" id")
+                                );
+        if(request.getTitle()!=null){
+            note.setTitle(request.getTitle());
+        }
+        if(request.getContent()!=null){
+            note.setContent(request.getContent());
+        }
+        return noteRepository.save(note);
+        
     }
 
 }
