@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import com.example.notesAPI.model.Note;
 import com.example.notesAPI.service.NoteService;
@@ -25,7 +26,7 @@ public class NoteController{
     }
     
     @PostMapping("/notes")
-    public ResponseEntity<Note> createNote(@RequestBody Note note){
+    public ResponseEntity<Note> createNote(@Valid @RequestBody Note note){
        Note savedNote= noteService.createNote(note);
         return ResponseEntity.status(HttpStatus.CREATED)
                             .body(savedNote);
@@ -48,7 +49,7 @@ public class NoteController{
     }
 
     @PutMapping("/notes/{id}")
-    public ResponseEntity<Note> updateNote(@PathVariable int id,@RequestBody Note note){
+    public ResponseEntity<Note> updateNote(@PathVariable int id,@Valid @RequestBody Note note){
         Note updatedNote= noteService.updateNoteById(id,note);
             return ResponseEntity
                                 .ok(updatedNote);
