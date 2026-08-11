@@ -1,9 +1,13 @@
 package com.example.notesAPI.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -20,7 +24,8 @@ public class Note{
     @NotBlank(message="Cant be Blank")
     @Size(max=1000,message="Cant be over 1000 characters")
     private String content;
-
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     public Note(){
     }
     public void setTitle(String title){
@@ -40,6 +45,23 @@ public class Note{
     }
     public void setId(int id){
         this.id=id;
+    }
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
+    }
+    public LocalDateTime getUpdatedAt(){
+        return updatedAt;
+    }
+    
+    @PrePersist
+    public void onCreate(){
+        createdAt=LocalDateTime.now();
+        updatedAt=LocalDateTime.now();
+    }
+    
+    @PreUpdate
+    public void onUpdate(){
+        updatedAt=LocalDateTime.now();
     }
     
 }
